@@ -1,3 +1,14 @@
-#from src.CNN_Classification import logger
+from src.CNN_Classification.pipeline.stage_01_data_ingestion import DataIngestionTrainigPipeline
 from src.CNN_Classification import logger
-logger.info("Logging has been set up successfully.")
+
+
+STAGE_NAME = "Data Ingestion Stage"
+
+try:
+    logger.info(f'>>>> stage {STAGE_NAME} started <<<<<')
+    data_ingestion = DataIngestionTrainigPipeline()
+    data_ingestion.main()
+    logger.info(f'>>>> stage {STAGE_NAME} completed <<<<<')
+except Exception as e:
+    logger.exception(e)
+    raise e
