@@ -9,7 +9,7 @@ STAGE_NAME = "Base Model Preparing Stage"
 class ModelPrepareTrainigPipeline:
     def __init__(self):
         pass
-    
+
     def main (self):
 
         config = ConfigurationManager()
