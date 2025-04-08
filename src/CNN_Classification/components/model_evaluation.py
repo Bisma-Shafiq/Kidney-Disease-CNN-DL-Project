@@ -1,6 +1,8 @@
 #components
 from src.CNN_Classification.utils.common import save_json
 from src.CNN_Classification.entity.config_entity import EvaluationConfig
+#components
+from src.CNN_Classification.utils.common import save_json
 import tensorflow as tf
 from pathlib import Path
 import mlflow
@@ -45,7 +47,7 @@ class Evaluation:
     def evaluation(self):
         self.model = self.load_model(self.config.path_of_model)
         self._valid_generator()
-        self.score = model.evaluate(self.valid_generator)
+        self.score = self.model.evaluate(self.valid_generator)
         self.save_score()
 
     def save_score(self):
@@ -65,6 +67,10 @@ class Evaluation:
             # Model registry does not work with file store
             if tracking_url_type_store != "file":
 
+                # Register the model
+                # There are other ways to use the Model Registry, which depends on the use case,
+                # please refer to the doc for more information:
+                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
                 mlflow.keras.log_model(self.model, "model", registered_model_name="VGG16Model")
             else:
                 mlflow.keras.log_model(self.model, "model")
